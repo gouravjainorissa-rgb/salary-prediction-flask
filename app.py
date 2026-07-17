@@ -1,5 +1,7 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, send_file
 import joblib
+
+from pdf_generator import generate_pdf
 
 app = Flask(__name__)
 
@@ -40,6 +42,31 @@ def predict():
         age=None,
         education=None,
         experience=None
+    )
+
+
+@app.route("/download-pdf")
+def download_pdf():
+
+    name = request.args.get("name")
+    age = request.args.get("age")
+    education = request.args.get("education")
+    experience = request.args.get("experience")
+    salary = float(request.args.get("salary"))
+
+    pdf = generate_pdf(
+        name,
+        age,
+        education,
+        experience,
+        salary
+    )
+
+    return send_file(
+        pdf,
+        as_attachment=True,
+        download_name="Salary_Prediction_Report.pdf",
+        mimetype="application/pdf"
     )
 
 

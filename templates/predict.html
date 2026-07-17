@@ -2,16 +2,12 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Salary Prediction</title>
 
     <link rel="stylesheet"
           href="{{ url_for('static', filename='style.css') }}">
-
 </head>
 
 <body>
@@ -87,6 +83,18 @@
         <div class="salary">
             ₹ {{ "{:,.0f}".format(salary) }}
         </div>
+
+        <br>
+
+        <a href="/download-pdf?name={{ name }}&age={{ age }}&education={{ education }}&experience={{ experience }}&salary={{ salary }}">
+
+            <button type="button">
+
+                📄 Download PDF Report
+
+            </button>
+
+        </a>
 
     </div>
 
